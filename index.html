@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QR Code Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>QR Code Generator</h1>
+    <form id="qrCodeForm">
+        <label for="urlInput">Enter URL:</label>
+        <input type="text" id="urlInput" name="url" required>
+        <button type="submit">Generate QR Code</button>
+    </form>
+    <div id="qrCodeImage">
+        <!-- The generated QR code will be displayed here -->
+    </div>
+
+    <script>
+        document.getElementById('qrCodeForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const url = document.getElementById('urlInput').value;
+            generateQRCode(url);
+        });
+
+        function generateQRCode(url) {
+            // Using an online QR code generation service to create the QR code image
+            const qrCodeImageUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(url)}&size=200x200`;
+            
+            // Displaying the generated QR code image
+            document.getElementById('qrCodeImage').innerHTML = `
+                <img src="${qrCodeImageUrl}" alt="QR Code for ${url}">
+            `;
+        }
+    </script>
+</body>
+</html>
